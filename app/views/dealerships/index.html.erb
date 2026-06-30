@@ -1,5 +1,20 @@
 <h1>Dealerships</h1>
 
-<% @dealerships.each do |dealership| %>
-  <p><%= link_to dealership.name, dealership %></p>
-<% end %>
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr style="background: #eee;">
+      <th style="padding: 8px; text-align: left;">Name</th>
+      <th style="padding: 8px; text-align: left;">City</th>
+      <th style="padding: 8px;"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dealerships.each do |dealership| %>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 8px;"><%= dealership.name %></td>
+        <td style="padding: 8px;"><%= dealership.city %></td>
+        <td style="padding: 8px;"><%= link_to "View Cars", dealership_path(dealership) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

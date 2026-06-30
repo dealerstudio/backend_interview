@@ -1,10 +1,12 @@
-<h1><%= @car.make %> <%= @car.model %></h1>
+<h1><%= @car.make %> <%= @car.model %> (<%= @car.year %>)</h1>
 
-<p><strong>Year:</strong> <%= @car.year %></p>
-<p><strong>Price:</strong> <%= @car.price %></p>
-<p><strong>VIN:</strong> <%= @car.vin %></p>
+<p><strong>Price:</strong> <%= number_to_currency(@car.price) %></p>
 <p><strong>Status:</strong> <%= @car.status %></p>
+<p><strong>VIN:</strong> <%= @car.vin.presence || "—" %></p>
 <p><strong>Dealership:</strong> <%= @car.dealership.name %></p>
 
-<%= link_to "Edit", edit_car_path(@car) %>
-<%= link_to "Back", cars_path %>
+<p>
+  <%= link_to "Edit", edit_car_path(@car) %>
+  &nbsp;
+  <%= link_to "Back to All Cars", cars_path %>
+</p>

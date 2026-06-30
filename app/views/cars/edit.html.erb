@@ -1,6 +1,7 @@
 <h1>Edit Car</h1>
-
 <%= render "form", car: @car %>
-
-<%= link_to "Show", @car %>
-<%= link_to "Back", cars_path %>
+<p>
+  <%= link_to "View", car_path(@car) %>
+  &nbsp;
+  <%= link_to "Back to All Cars", cars_path %>
+</p>

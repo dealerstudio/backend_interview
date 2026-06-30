@@ -1,46 +1,42 @@
-<%= form_with(model: car) do |form| %>
+<%= form_with model: car do |f| %>
   <% if car.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+    <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 12px;">
+      <strong><%= pluralize(car.errors.count, "error") %> prevented this car from being saved:</strong>
       <ul>
-        <% car.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% car.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :make %>
-    <%= form.text_field :make %>
+  <div style="margin-bottom: 10px;">
+    <%= f.label :make %><br>
+    <%= f.text_field :make, style: "width: 300px;" %>
   </div>
 
-  <div>
-    <%= form.label :model %>
-    <%= form.text_field :model %>
+  <div style="margin-bottom: 10px;">
+    <%= f.label :model %><br>
+    <%= f.text_field :model, style: "width: 300px;" %>
   </div>
 
-  <div>
-    <%= form.label :year %>
-    <%= form.number_field :year %>
+  <div style="margin-bottom: 10px;">
+    <%= f.label :year %><br>
+    <%= f.number_field :year, style: "width: 120px;" %>
   </div>
 
-  <div>
-    <%= form.label :price %>
-    <%= form.number_field :price, step: "0.01" %>
+  <div style="margin-bottom: 10px;">
+    <%= f.label :price %><br>
+    <%= f.number_field :price, step: 0.01, style: "width: 150px;" %>
   </div>
 
-  <div>
-    <%= form.label :vin %>
-    <%= form.text_field :vin %>
+  <div style="margin-bottom: 10px;">
+    <!-- TODO: validate VIN format client-side (17 alphanumeric characters) -->
+    <%= f.label :vin, "VIN" %><br>
+    <%= f.text_field :vin, style: "width: 300px;", maxlength: 17 %>
   </div>
 
-  <div>
-    <%= form.label :status %>
-    <%= form.select :status, Car::STATUSES %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div style="margin-bottom: 16px;">
+    <%= f.submit style: "padding: 8px 20px; cursor: pointer;" %>
   </div>
 <% end %>

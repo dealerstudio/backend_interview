@@ -1,36 +1,40 @@
-<h1>Cars</h1>
+<h1>All Cars</h1>
 
-<table>
+<!-- TODO: add search/filter by make, status -->
+<!-- TODO: add pagination -->
+
+<%= link_to "Add Car", new_car_path, style: "display: inline-block; margin-bottom: 12px;" %>
+
+<table style="width: 100%; border-collapse: collapse;">
   <thead>
-    <tr>
-      <th>Make</th>
-      <th>Model</th>
-      <th>Year</th>
-      <th>Price</th>
-      <th>VIN</th>
-      <th>Status</th>
-      <th>Dealership</th>
-      <th>Actions</th>
+    <tr style="background: #eee;">
+      <th style="padding: 8px; text-align: left;">Make</th>
+      <th style="padding: 8px; text-align: left;">Model</th>
+      <th style="padding: 8px; text-align: left;">Year</th>
+      <th style="padding: 8px; text-align: left;">Price</th>
+      <th style="padding: 8px; text-align: left;">Status</th>
+      <th style="padding: 8px; text-align: left;">Dealership</th>
+      <th style="padding: 8px;"></th>
     </tr>
   </thead>
   <tbody>
     <% @cars.each do |car| %>
-      <tr>
-        <td><%= car.make %></td>
-        <td><%= car.model %></td>
-        <td><%= car.year %></td>
-        <td><%= car.price %></td>
-        <td><%= car.vin %></td>
-        <td><%= car.status %></td>
-        <td><%= car.dealership.name %></td>
-        <td>
-          <%= link_to "Show", car %>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 8px;"><%= car.make %></td>
+        <td style="padding: 8px;"><%= car.model %></td>
+        <td style="padding: 8px;"><%= car.year %></td>
+        <td style="padding: 8px;"><%= number_to_currency(car.price) %></td>
+        <td style="padding: 8px;"><%= car.status %></td>
+        <td style="padding: 8px;"><%= car.dealership.name %></td><!-- N+1: fires one SELECT per row -->
+        <td style="padding: 8px;">
+          <%= link_to "View", car_path(car) %>
+          &nbsp;
           <%= link_to "Edit", edit_car_path(car) %>
-          <%= link_to "Delete", car, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          &nbsp;
+          <%= button_to "Delete", car_path(car), method: :delete,
+                style: "background: none; border: none; color: red; cursor: pointer; padding: 0;" %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to "New Car", new_car_path %>

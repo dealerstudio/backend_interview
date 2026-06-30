@@ -1,9 +1,33 @@
 <h1><%= @dealership.name %></h1>
+<p><strong>City:</strong> <%= @dealership.city %></p>
 
-<h2>Cars</h2>
+<h2>Cars at this dealership</h2>
 
-<% @cars.each do |car| %>
-  <p><%= link_to "#{car.make} #{car.model} (#{car.year})", car %></p>
+<% if @cars.empty? %>
+  <p>No cars listed.</p>
+<% else %>
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="background: #eee;">
+        <th style="padding: 8px; text-align: left;">Make</th>
+        <th style="padding: 8px; text-align: left;">Model</th>
+        <th style="padding: 8px; text-align: left;">Year</th>
+        <th style="padding: 8px; text-align: left;">Price</th>
+        <th style="padding: 8px; text-align: left;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cars.each do |car| %>
+        <tr style="border-bottom: 1px solid #ddd;">
+          <td style="padding: 8px;"><%= car.make %></td>
+          <td style="padding: 8px;"><%= car.model %></td>
+          <td style="padding: 8px;"><%= car.year %></td>
+          <td style="padding: 8px;"><%= number_to_currency(car.price) %></td>
+          <td style="padding: 8px;"><%= car.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
 
-<%= link_to "Back", dealerships_path %>
+<p><%= link_to "Back to Dealerships", dealerships_path %></p>
