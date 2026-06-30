@@ -1,24 +1,23 @@
-# README
+# Dealer Interview App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails 8 dealership management app. Your task is to find and fix the bugs.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+    bundle install
+    rails db:create db:migrate db:seed
+    rails server
 
-* System dependencies
+Login: `staff1@sydneycity.com` / `password`
 
-* Configuration
+## Your Task
 
-* Database creation
+Run the test suite:
 
-* Database initialization
+    bundle exec rspec
 
-* How to run the test suite
+Seven specs are currently failing. Make them all pass without deleting or
+modifying the spec files.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The failures map to three bugs in the codebase. Find them, fix them, and
+explain your reasoning as you go.
