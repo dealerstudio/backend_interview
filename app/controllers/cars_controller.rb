@@ -41,7 +41,8 @@ class CarsController < ApplicationController
   private
 
   def set_car
-    # TODO: add authorization check — should be current_user.dealership.cars.find(params[:id])
+    # TODO: add authorization check — scope to current_user.dealership.cars.find(params[:id])
+    # TODO: if the car is not found, redirect to cars_path with an alert message
     @car = Car.find(params[:id]) # BUG: no ownership check; any user can edit/delete any car
   end
 
