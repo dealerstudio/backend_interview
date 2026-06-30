@@ -1,0 +1,36 @@
+<h1>Cars</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Year</th>
+      <th>Price</th>
+      <th>VIN</th>
+      <th>Status</th>
+      <th>Dealership</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.make %></td>
+        <td><%= car.model %></td>
+        <td><%= car.year %></td>
+        <td><%= car.price %></td>
+        <td><%= car.vin %></td>
+        <td><%= car.status %></td>
+        <td><%= car.dealership.name %></td>
+        <td>
+          <%= link_to "Show", car %>
+          <%= link_to "Edit", edit_car_path(car) %>
+          <%= link_to "Delete", car, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Car", new_car_path %>

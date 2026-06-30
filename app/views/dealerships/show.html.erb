@@ -1,0 +1,9 @@
+<h1><%= @dealership.name %></h1>
+
+<h2>Cars</h2>
+
+<% @cars.each do |car| %>
+  <p><%= link_to "#{car.make} #{car.model} (#{car.year})", car %></p>
+<% end %>
+
+<%= link_to "Back", dealerships_path %>
