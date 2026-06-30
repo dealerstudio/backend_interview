@@ -10,11 +10,6 @@ RSpec.describe CarsController, type: :controller do
 
   before { sign_in user_a }
 
-  # -----------------------------------------------------------------------
-  # BUG 1: N+1 query — index loads Car.all and the view calls
-  #         car.dealership.name per row, firing one extra query per car.
-  #         Fix: add .includes(:dealership) to Car.all in #index.
-  # -----------------------------------------------------------------------
   describe "GET #index" do
     it "does not trigger N+1 queries when displaying cars" do
       create_list(:car, 3, dealership: dealership_a)
@@ -30,16 +25,10 @@ RSpec.describe CarsController, type: :controller do
 
       dealership_queries = queries.select { |q| q.include?("dealerships") }
       expect(dealership_queries.count).to eq(1),
-        "Expected 1 dealership query (eager-loaded), got #{dealership_queries.count}. " \
-        "Fix: use Car.includes(:dealership) in CarsController#index"
+        "Expected 1 dealership query, got #{dealership_queries.count}"
     end
   end
 
-  # -----------------------------------------------------------------------
-  # BUG 2: Missing authorization — any authenticated user can edit/delete
-  #         any car, regardless of which dealership they belong to.
-  #         Fix: scope Car.find through current_user.dealership.cars.
-  # -----------------------------------------------------------------------
   describe "PATCH #update" do
     it "prevents a user from updating a car belonging to another dealership" do
       patch :update, params: { id: car_b.id, car: { make: "Hacked" } }

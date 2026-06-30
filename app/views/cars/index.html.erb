@@ -1,7 +1,5 @@
 <h1>All Cars</h1>
 
-<!-- TODO: add search/filter by make, status -->
-<!-- TODO: add pagination -->
 
 <%= link_to "Add Car", new_car_path, style: "display: inline-block; margin-bottom: 12px;" %>
 
@@ -25,7 +23,7 @@
         <td style="padding: 8px;"><%= car.year %></td>
         <td style="padding: 8px;"><%= number_to_currency(car.price) %></td>
         <td style="padding: 8px;"><%= car.status %></td>
-        <td style="padding: 8px;"><%= car.dealership.name %></td><!-- N+1: fires one SELECT per row -->
+        <td style="padding: 8px;"><%= car.dealership.name %></td>
         <td style="padding: 8px;">
           <%= link_to "View", car_path(car) %>
           &nbsp;

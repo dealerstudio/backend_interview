@@ -2,8 +2,7 @@ class CarsController < ApplicationController
   before_action :set_car, only: %i[show edit update destroy]
 
   def index
-    # TODO: scope to current_user.dealership
-    @cars = Car.all # BUG: missing .includes(:dealership) — causes N+1 in view
+    @cars = Car.all
   end
 
   def show; end
@@ -41,14 +40,10 @@ class CarsController < ApplicationController
   private
 
   def set_car
-    # TODO: add authorization check — scope to current_user.dealership.cars.find(params[:id])
-    # TODO: if the car is not found, redirect to cars_path with an alert message
-    @car = Car.find(params[:id]) # BUG: no ownership check; any user can edit/delete any car
+    @car = Car.find(params[:id])
   end
 
   def car_params
-    # TODO: implement status transition logic (available → sold only)
-    # TODO: remove :status from permitted params once transition logic exists
     params.require(:car).permit(:make, :model, :year, :price, :vin, :status)
   end
 end

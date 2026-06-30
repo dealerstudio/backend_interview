@@ -5,6 +5,4 @@ class Dealership < ApplicationRecord
   has_many :users, dependent: :destroy
 
   scope :active, -> { where(active: true) }
-
-  # BUG: missing validates :slug, uniqueness: true
 end
