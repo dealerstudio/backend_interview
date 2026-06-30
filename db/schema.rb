@@ -10,37 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_30_004909) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_30_004909) do
   create_table "cars", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "dealership_id", null: false
     t.string "make"
     t.string "model"
+    t.integer "year"
     t.decimal "price", precision: 10, scale: 2
     t.string "status", default: "available"
-    t.datetime "updated_at", null: false
     t.string "vin"
-    t.integer "year"
+    t.integer "dealership_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["dealership_id"], name: "index_cars_on_dealership_id"
   end
 
   create_table "dealerships", force: :cascade do |t|
-    t.boolean "active", default: true, null: false
-    t.string "city"
-    t.datetime "created_at", null: false
     t.string "name", null: false
     t.string "slug"
+    t.string "city"
+    t.boolean "active", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "dealership_id", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.datetime "remember_created_at"
-    t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "dealership_id", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dealership_id"], name: "index_users_on_dealership_id"
     t.index ["email"], name: "index_users_on_email", unique: true
